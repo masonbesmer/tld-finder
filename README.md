@@ -19,7 +19,8 @@ tldfinder tlds --tld com,io,dev,de
 
 `check` reads one column of names (auto-detected from `name,label,domain,keyword,sld`,
 or `--column`), expands them against the TLD set (`--tld`, `--tld-file`, or a per-row
-`--tld-column`), and writes `csv` (default), `jsonl`, or `table` via `--format`.
+`--tld-column`), and writes `csv` (default), `jsonl`, `table`, or `list`
+(newline-separated domain names, e.g. for piping into another tool) via `--format`.
 `--dry-run` prints the expanded domains and the RDAP host each would hit, without
 checking. Every flag also reads `TLDFINDER_<FLAG_UPPER_SNAKE>`; the flag wins.
 Flags must precede the input file.

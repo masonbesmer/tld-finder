@@ -273,7 +273,8 @@ input,domain,tld,status,authority,checked_at,latency_ms,expiry,note,error
 ```
 Timestamps RFC 3339 UTC; empty string for absent optionals. `jsonl` = one `Result`
 per line using the §3 tags. `table` = aligned `text/tabwriter`, for humans, never
-for piping.
+for piping. `list` = `Result.Domain`, one per line, no header — for piping into
+another tool.
 
 ---
 
@@ -298,7 +299,7 @@ TLD; it needs no input file and makes the §0 coverage limit visible up front.
 | `--has-header` | auto | `auto` sniffs; `true`/`false` force. |
 | `--delimiter` | `,` | Single rune; `\t` accepted. |
 | `--out` | stdout | Output path. |
-| `--format` | `csv` | `csv` \| `jsonl` \| `table`. |
+| `--format` | `csv` | `csv` \| `jsonl` \| `table` \| `list` (newline-separated domains). |
 | `--only` | — | Emit only these statuses, e.g. `available`. |
 | `--timeout` | 10s | Per request. |
 | `--retries` | 2 | Per domain. |

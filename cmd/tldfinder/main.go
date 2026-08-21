@@ -182,7 +182,7 @@ func cmdCheck(args []string) int {
 	hasHeader := fs.String("has-header", "auto", "auto, true, or false")
 	delimiter := fs.String("delimiter", ",", `field delimiter (\t accepted)`)
 	out := fs.String("out", "", "output path (default stdout)")
-	format := fs.String("format", "csv", "csv, jsonl, or table")
+	format := fs.String("format", "csv", "csv, jsonl, table, or list (newline-separated domains)")
 	only := fs.String("only", "", "emit only these statuses, e.g. available")
 	timeout := fs.Duration("timeout", 10*time.Second, "per-request timeout")
 	retries := fs.Int("retries", 2, "retries per domain")

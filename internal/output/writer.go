@@ -20,11 +20,12 @@ type Writer struct {
 	csv  *csv.Writer
 	tab  *tabwriter.Writer
 	enc  *json.Encoder
+	list io.Writer
 }
 
-// New returns a writer for format ("csv", "jsonl", or "table"). The CSV header
-// and table header are written immediately, so they appear even with zero rows.
-// only filters emitted statuses; empty means all.
+// New returns a writer for format ("csv", "jsonl", "table", or "list"). The
+// CSV header and table header are written immediately, so they appear even
+// with zero rows. only filters emitted statuses; empty means all.
 func New(w io.Writer, format string, only []check.Status) (*Writer, error) {
 	o := &Writer{only: map[check.Status]bool{}}
 	for _, s := range only {
@@ -41,8 +42,11 @@ func New(w io.Writer, format string, only []check.Status) (*Writer, error) {
 		o.tab = tabwriter.NewWriter(w, 2, 4, 2, ' ', 0)
 		_, err := fmt.Fprintln(o.tab, "DOMAIN\tSTATUS\tEXPIRY\tAUTHORITY\tNOTE")
 		return o, err
+	case "list":
+		o.list = w
+		return o, nil
 	default:
-		return nil, fmt.Errorf("invalid format %q (want csv, jsonl, or table)", format)
+		return nil, fmt.Errorf("invalid format %q (want csv, jsonl, table, or list)", format)
 	}
 }
 
@@ -64,6 +68,9 @@ func (o *Writer) Write(r check.Result) error {
 		})
 	case o.enc != nil:
 		return o.enc.Encode(r)
+	case o.list != nil:
+		_, err := fmt.Fprintln(o.list, r.Domain)
+		return err
 	default:
 		note := r.Note
 		if r.Err != "" {

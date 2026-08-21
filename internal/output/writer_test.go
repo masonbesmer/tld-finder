@@ -43,7 +43,7 @@ func render(t *testing.T, format string, only []check.Status, results []check.Re
 }
 
 func TestGolden(t *testing.T) {
-	for _, format := range []string{"csv", "jsonl", "table"} {
+	for _, format := range []string{"csv", "jsonl", "table", "list"} {
 		t.Run(format, func(t *testing.T) {
 			got := render(t, format, nil, fixtures())
 			path := filepath.Join("..", "..", "testdata", "golden", "results."+format)
