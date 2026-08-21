@@ -7,7 +7,7 @@ import (
 	"math/rand/v2"
 	"time"
 
-	"github.com/masonbesmer/tldfinder/internal/input"
+	"github.com/masonbesmer/tld-finder/internal/input"
 )
 
 type Runner struct {

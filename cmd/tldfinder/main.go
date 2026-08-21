@@ -18,9 +18,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/masonbesmer/tldfinder/internal/check"
-	"github.com/masonbesmer/tldfinder/internal/input"
-	"github.com/masonbesmer/tldfinder/internal/output"
+	"github.com/masonbesmer/tld-finder/internal/check"
+	"github.com/masonbesmer/tld-finder/internal/input"
+	"github.com/masonbesmer/tld-finder/internal/output"
 )
 
 var version = "dev"
@@ -292,7 +292,7 @@ func cmdCheck(args []string) int {
 		Client: &check.Client{
 			HTTP:      check.NewHTTPClient(),
 			Bootstrap: boot,
-			UserAgent: "tldfinder/" + version + " (+https://github.com/masonbesmer/tldfinder)",
+			UserAgent: "tldfinder/" + version + " (+https://github.com/masonbesmer/tld-finder)",
 			Timeout:   *timeout,
 		},
 		Rate:    *rate,

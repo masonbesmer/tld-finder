@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/masonbesmer/tldfinder/internal/check"
+	"github.com/masonbesmer/tld-finder/internal/check"
 )
 
 var update = flag.Bool("update", false, "rewrite golden files")

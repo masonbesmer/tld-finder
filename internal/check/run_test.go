@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/masonbesmer/tldfinder/internal/input"
+	"github.com/masonbesmer/tld-finder/internal/input"
 )
 
 type rtFunc func(*http.Request) (*http.Response, error)

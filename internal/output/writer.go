@@ -10,7 +10,7 @@ import (
 	"text/tabwriter"
 	"time"
 
-	"github.com/masonbesmer/tldfinder/internal/check"
+	"github.com/masonbesmer/tld-finder/internal/check"
 )
 
 var csvHeader = []string{"input", "domain", "tld", "status", "authority", "checked_at", "latency_ms", "expiry", "note", "error"}

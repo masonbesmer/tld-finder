@@ -1,4 +1,4 @@
-module github.com/masonbesmer/tldfinder
+module github.com/masonbesmer/tld-finder
 
 go 1.26
 
