@@ -62,7 +62,7 @@ func (l *BootstrapLoader) fetch(ctx context.Context, cache string) (Bootstrap, e
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 	switch resp.StatusCode {
 	case http.StatusNotModified:
 		data, err := os.ReadFile(cache)

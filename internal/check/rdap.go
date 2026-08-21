@@ -95,14 +95,14 @@ func (c *Client) query(ctx context.Context, base, fqdn string) (Result, error) {
 	if err != nil {
 		return Result{}, err
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 	body, err := io.ReadAll(io.LimitReader(resp.Body, maxBody))
 	if err != nil {
 		return Result{}, err
 	}
 	res := Result{Authority: base, CheckedAt: time.Now().UTC(), Latency: time.Since(start)}
-	switch {
-	case resp.StatusCode == http.StatusOK:
+	switch resp.StatusCode {
+	case http.StatusOK:
 		res.Status = StatusRegistered
 		var doc rdapDomain
 		if err := json.Unmarshal(body, &doc); err != nil {
@@ -124,12 +124,12 @@ func (c *Client) query(ctx context.Context, base, fqdn string) (Result, error) {
 			}
 		}
 		return res, nil
-	case resp.StatusCode == http.StatusNotFound:
+	case http.StatusNotFound:
 		res.Status = StatusAvailable // RFC 7480 §5.3: the object does not exist
 		return res, nil
-	case resp.StatusCode == http.StatusTooManyRequests:
+	case http.StatusTooManyRequests:
 		return Result{}, &RateLimitError{Host: host, RetryAfter: parseRetryAfter(resp.Header.Get("Retry-After"))}
-	case resp.StatusCode == http.StatusBadRequest:
+	case http.StatusBadRequest:
 		var doc rdapDomain
 		_ = json.Unmarshal(body, &doc)
 		if reservedRe.MatchString(doc.Title) {

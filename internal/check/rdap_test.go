@@ -57,7 +57,7 @@ func rdapServer(t *testing.T) *httptest.Server {
 	mux.HandleFunc("/rdap/domain/big.com", func(w http.ResponseWriter, r *http.Request) {
 		// Valid JSON larger than the 1 MiB cap: truncation must break the
 		// parse, not hang or OOM.
-		fmt.Fprintf(w, `{"objectClassName":"domain","remarks":[{"title":"%s"}]}`, strings.Repeat("x", 2<<20))
+		_, _ = fmt.Fprintf(w, `{"objectClassName":"domain","remarks":[{"title":"%s"}]}`, strings.Repeat("x", 2<<20))
 	})
 	// /redir/{n}/domain/{d}: n redirects, then a 404.
 	mux.HandleFunc("/redir/", func(w http.ResponseWriter, r *http.Request) {

@@ -13,7 +13,7 @@ func readFile(t *testing.T, name string, opt CSVOptions) []Row {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer f.Close()
+	defer func() { _ = f.Close() }()
 	rows, err := ReadCSV(f, opt)
 	if err != nil {
 		t.Fatal(err)
@@ -72,7 +72,7 @@ func TestReadCSVColumnByName(t *testing.T) {
 
 func TestReadCSVMissingColumn(t *testing.T) {
 	f, _ := os.Open(filepath.Join("..", "..", "testdata", "input", "header.csv"))
-	defer f.Close()
+	defer func() { _ = f.Close() }()
 	if _, err := ReadCSV(f, CSVOptions{Column: "nope"}); err == nil {
 		t.Fatal("expected error for missing column")
 	}

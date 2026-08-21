@@ -241,7 +241,9 @@ func cmdCheck(args []string) int {
 	rows, err := input.ReadCSV(f, input.CSVOptions{
 		Delimiter: delim, HasHeader: *hasHeader, Column: *column, TLDColumn: *tldColumn,
 	})
-	f.Close()
+	if cerr := f.Close(); cerr != nil && err == nil {
+		err = cerr
+	}
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		return 1
@@ -309,17 +311,23 @@ func cmdCheck(args []string) int {
 		}
 	})
 
-	if err := w.Flush(); err == nil {
-		err = buf.Flush()
+	flushErr := w.Flush()
+	if flushErr == nil {
+		flushErr = buf.Flush()
 	}
 	if *out != "" {
-		dst.Close()
+		if cerr := dst.Close(); cerr != nil && flushErr == nil {
+			flushErr = cerr
+		}
 	}
 	switch {
 	case errors.Is(runErr, context.Canceled):
 		return 130
 	case runErr != nil:
 		fmt.Fprintln(os.Stderr, runErr)
+		return 1
+	case flushErr != nil:
+		fmt.Fprintln(os.Stderr, flushErr)
 		return 1
 	case bad:
 		return 3
