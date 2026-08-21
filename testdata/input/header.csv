@@ -1,0 +1,6 @@
+name,notes
+acme,client A
+"north star",client B
+café,idn test
+ACME ,dup after normalize
+acme.io,already qualified

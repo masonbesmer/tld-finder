@@ -1,0 +1,5 @@
+DOMAIN          STATUS      EXPIRY                AUTHORITY                NOTE
+acme.com        available                         https://rdap.example/v1  
+acme.io         registered  2027-08-13T04:00:00Z  https://rdap.example/v1  pending delete
+xn--caf-dma.de  unknown                                                    no RDAP endpoint for .de
+boom.com        error                                                      unexpected status 500

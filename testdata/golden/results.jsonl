@@ -1,0 +1,4 @@
+{"input":"acme","domain":"acme.com","tld":"com","status":"available","authority":"https://rdap.example/v1","checked_at":"2026-01-02T03:04:05Z","latency_ms":123}
+{"input":"acme","domain":"acme.io","tld":"io","status":"registered","authority":"https://rdap.example/v1","checked_at":"2026-01-02T03:04:05Z","expiry":"2027-08-13T04:00:00Z","note":"pending delete","latency_ms":45}
+{"input":"café","domain":"xn--caf-dma.de","tld":"de","status":"unknown","authority":"","checked_at":"2026-01-02T03:04:05Z","note":"no RDAP endpoint for .de","latency_ms":0}
+{"input":"boom","domain":"boom.com","tld":"com","status":"error","authority":"","checked_at":"2026-01-02T03:04:05Z","error":"unexpected status 500","latency_ms":0}

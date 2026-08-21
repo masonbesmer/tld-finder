@@ -1,0 +1,7 @@
+/dist/
+/bin/
+/tldfinder
+*.out
+*.test
+.env
+/testdata/tmp/

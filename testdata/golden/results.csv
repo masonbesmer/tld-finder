@@ -1,0 +1,5 @@
+input,domain,tld,status,authority,checked_at,latency_ms,expiry,note,error
+acme,acme.com,com,available,https://rdap.example/v1,2026-01-02T03:04:05Z,123,,,
+acme,acme.io,io,registered,https://rdap.example/v1,2026-01-02T03:04:05Z,45,2027-08-13T04:00:00Z,pending delete,
+café,xn--caf-dma.de,de,unknown,,2026-01-02T03:04:05Z,0,,no RDAP endpoint for .de,
+boom,boom.com,com,error,,2026-01-02T03:04:05Z,0,,,unexpected status 500
